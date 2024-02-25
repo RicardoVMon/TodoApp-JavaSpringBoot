@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{/layout/plantilla :: head}">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                </head>
+                <body class="d-flex flex-column min-vh-100">
+                    <nav th:replace="~{/layout/plantilla :: nav}"></nav>
+                    <section class="container border p-5 d-flex justify-content-center align-items-center w-50" style="margin-top: 15vh">
+                        <form th:action="@{/crear}" th:object="${tarea}" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="idTarea" th:value="${tarea.idTarea}">
+                            <div class="h1 text-center mb-3">Editando tarea: [[*{nombreTarea}]]</div>
+                            <div class="form-group mb-3">
+                                <label class="form-label">Nombre de Tarea</label>
+                                <input th:field="*{nombreTarea}" required type="text" name="nombreTarea" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Descripción de Tarea</label>
+                                <input th:field="*{descripcion}" required type="text" name="descripcion" class="form-control">
+                                <input type="hidden" name="activa" value="true">
+                            </div>
+                            <div class="d-flex justify-content-center my-3">
+                                <button class="btn btn-success" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </section>
+                    <footer th:replace="~{/layout/plantilla :: footer}"></footer>
+                </body>
+                </html>

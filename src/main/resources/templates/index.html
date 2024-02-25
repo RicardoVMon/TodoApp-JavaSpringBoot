@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{/layout/plantilla :: head}">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                </head>
+                <body class="d-flex flex-column min-vh-100">
+                    <nav th:replace="~{/layout/plantilla :: nav}"></nav>
+                    <section class="container text-center my-5 mb-0 p-3">
+                        <h1>Tareas Pendientes</h1>
+                        <div class="d-flex my-3 justify-content-left">
+                            <a th:href="@{/crear}" class="btn btn-success">Agregar Tarea</a> 
+                        </div>
+                        <table th:if="${tareasActivas != null and !tareasActivas.empty}" class="table table-striped align-middle">
+                            <thead class="bg-dark text-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre Tarea</th>
+                                    <th>Descripción</th>
+                                    <th>Estado</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="tarea : ${tareasActivas}">
+                                    <td th:text="${tarea.idTarea}"></td>
+                                    <td th:text="${tarea.nombreTarea}"></td>
+                                    <td th:text="${tarea.descripcion}"></td>
+                                    <td th:text="${tarea.activa ? 'Activa' : 'Inactiva'}"></td>
+                                    <td>
+                                        <a th:href="@{/actualizar/}+${tarea.idTarea}" class="btn btn-primary btn-sm w-50 my-3">Editar Tarea</a>
+                                        <a th:href="@{/completar/}+${tarea.idTarea}" class="btn btn-success btn-sm">
+                                            <i class="fas fa-check"></i> 
+                                        </a>
+                                        <!--<a th:href="@{/delete/}+${tarea.idTarea}" class="btn btn-danger btn-sm">Eliminar Tarea</a>-->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    
+                    <section th:if="${tareasInactivas != null and !tareasInactivas.empty}" class="container text-center pb-5 p-3">
+                        <h1 class="my-3">Tareas Completadas</h1>
+                        <table class="table table-striped align-middle">
+                            <thead class="bg-dark text-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre Tarea</th>
+                                    <th>Descripción</th>
+                                    <th>Estado</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="tarea : ${tareasInactivas}">
+                                    <td th:text="${tarea.idTarea}"></td>
+                                    <td th:text="${tarea.nombreTarea}"></td>
+                                    <td th:text="${tarea.descripcion}"></td>
+                                    <td th:text="${tarea.activa ? 'Activa' : 'Inactiva'}"></td>
+                                    <td>
+                                        <a th:href="@{/decompletar/}+${tarea.idTarea}" class="btn btn-success btn-sm">
+                                           <i class="fas fa-trash-restore mx-1"></i>Restaurar
+                                        </a>
+                                        <a th:href="@{/delete/}+${tarea.idTarea}" class="btn btn-danger btn-sm">Eliminar Tarea</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    
+                    <footer th:replace="~{/layout/plantilla :: footer}"></footer>
+                </body>
+                </html>
