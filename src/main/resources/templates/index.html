@@ -18,7 +18,6 @@
                         <table th:if="${tareasActivas != null and !tareasActivas.empty}" class="table table-striped align-middle">
                             <thead class="bg-dark text-light">
                                 <tr>
-                                    <th>#</th>
                                     <th>Nombre Tarea</th>
                                     <th>Descripción</th>
                                     <th>Estado</th>
@@ -27,7 +26,6 @@
                             </thead>
                             <tbody>
                                 <tr th:each="tarea : ${tareasActivas}">
-                                    <td th:text="${tarea.idTarea}"></td>
                                     <td th:text="${tarea.nombreTarea}"></td>
                                     <td th:text="${tarea.descripcion}"></td>
                                     <td th:text="${tarea.activa ? 'Activa' : 'Inactiva'}"></td>
@@ -48,7 +46,6 @@
                         <table class="table table-striped align-middle">
                             <thead class="bg-dark text-light">
                                 <tr>
-                                    <th>#</th>
                                     <th>Nombre Tarea</th>
                                     <th>Descripción</th>
                                     <th>Estado</th>
@@ -57,7 +54,6 @@
                             </thead>
                             <tbody>
                                 <tr th:each="tarea : ${tareasInactivas}">
-                                    <td th:text="${tarea.idTarea}"></td>
                                     <td th:text="${tarea.nombreTarea}"></td>
                                     <td th:text="${tarea.descripcion}"></td>
                                     <td th:text="${tarea.activa ? 'Activa' : 'Inactiva'}"></td>
