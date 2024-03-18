@@ -19,6 +19,10 @@ public class Tarea implements Serializable {
     private String nombreTarea;
     private String descripcion;
     private boolean activa;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
     public Tarea() {
     }

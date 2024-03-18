@@ -1,7 +1,9 @@
 package com.todoapp.controller;
 
 import com.todoapp.domain.Tarea;
+import com.todoapp.domain.Usuario;
 import com.todoapp.service.TareaService;
+import com.todoapp.service.UsuarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,55 +15,25 @@ public class IndexController {
     
     @Autowired
     TareaService tareaService;
+    
+    @Autowired
+    UsuarioService usuarioService;
 
-    @GetMapping("/")
-    public String page(Model model) {
-        List<Tarea> listaActivas = tareaService.getTareas();
-        List<Tarea> listaInactivas = tareaService.getTareasInactivas();
+    @GetMapping("/{idUsuario}")
+    public String page(Model model, Usuario usuario) {
+        
+        usuario = usuarioService.getUsuario(usuario);
+        model.addAttribute("idUsuario", usuario.getIdUsuario());
+        
+        List<Tarea> listaActivas = tareaService.getTareas(usuario);
         model.addAttribute("tareasActivas", listaActivas);
+        
+        List<Tarea> listaInactivas = tareaService.getTareasInactivas(usuario);
         model.addAttribute("tareasInactivas", listaInactivas);
+        
         return "index";
     }
 
-    @GetMapping("/delete/{idTarea}")
-    public String page(Tarea tarea) {
-        tareaService.delete(tarea);
-        return "redirect:/";
-    }
-
-    @GetMapping("/crear")
-    public String page() {
-        return "/tareas/crear";
-    }
-
-    @PostMapping("/crear")
-    public String tareaCreate(Tarea tarea) {
-        tareaService.save(tarea);
-        return "redirect:/";
-    }
     
-    @GetMapping("/actualizar/")
-    public String pageActualizar(Tarea tarea, Model model) {
-        return "/tareas/actualizar";
-    }
-    
-    @GetMapping("/actualizar/{idTarea}")
-    public String page(Tarea tarea, Model model) {
-        tarea = tareaService.getTarea(tarea);
-        model.addAttribute("tarea", tarea);
-        return "/tareas/actualizar";
-    }
-    
-    @GetMapping("/completar/{idTarea}")
-    public String pageCompletar(Tarea tarea) {
-        tareaService.save(tareaService.complete(tareaService.getTarea(tarea)));
-        return "redirect:/";
-    }
-    
-    @GetMapping("/decompletar/{idTarea}")
-    public String pageDecompletar(Tarea tarea) {
-        tareaService.save(tareaService.uncomplete(tareaService.getTarea(tarea)));
-        return "redirect:/";
-    }
     
 }

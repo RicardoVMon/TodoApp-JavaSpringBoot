@@ -11,7 +11,8 @@
                 <body class="d-flex flex-column min-vh-100">
                     <nav th:replace="~{/layout/plantilla :: nav}"></nav>
                     <section class="container border p-5 d-flex justify-content-center align-items-center w-50" style="margin-top: 15vh">
-                        <form th:action="@{/crear}" th:object="${tarea}" method="POST" enctype="multipart/form-data">
+                        <form th:action="@{/crear/}+${idUsuario}" th:object="${tarea}" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="usuario.idUsuario" th:value="${idUsuario}" />
                             <div class="h1 text-center mb-3">¿Qué tarea quiere agregar?</div>
                             <div class="form-group mb-3">
                                 <label class="form-label">Nombre de Tarea</label>

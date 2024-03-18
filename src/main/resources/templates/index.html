@@ -7,7 +7,7 @@
     <body class="d-flex flex-column min-vh-100">
 
         <nav th:replace="~{/layout/plantilla :: nav}"></nav>
-
+        
         <section th:if="${tareasActivas != null and !tareasActivas.empty}" class="container m-auto text-center my-5 mb-0 p-3">
             <h1>Tareas Pendientes</h1>
             <table class="table table-striped align-middle">
@@ -23,11 +23,10 @@
                         <td th:text="${tarea.nombreTarea}"></td>
                         <td th:text="${tarea.descripcion}"></td>
                         <td>
-                            <a th:href="@{/actualizar/}+${tarea.idTarea}" class="btn btn-primary btn-sm w-50 my-3">Editar Tarea</a>
-                            <a th:href="@{/completar/}+${tarea.idTarea}" class="btn btn-success btn-sm">
+                            <a th:href="@{'/actualizar/' + ${idUsuario} + '/' + ${tarea.idTarea}}" class="btn btn-primary btn-sm w-50 my-3">Editar Tarea</a>
+                            <a th:href="@{'/completar/' + ${idUsuario} + '/' + ${tarea.idTarea}}" class="btn btn-success btn-sm">
                                 <i class="fas fa-check"></i> 
                             </a>
-                            <!--<a th:href="@{/delete/}+${tarea.idTarea}" class="btn btn-danger btn-sm">Eliminar Tarea</a>-->
                         </td>
                     </tr>
                 </tbody>
@@ -49,10 +48,10 @@
                         <td th:text="${tarea.nombreTarea}"></td>
                         <td th:text="${tarea.descripcion}"></td>
                         <td>
-                            <a th:href="@{/decompletar/}+${tarea.idTarea}" class="btn btn-success btn-sm">
+                            <a th:href="@{'/decompletar/' + ${idUsuario} + '/' + ${tarea.idTarea}}" class="btn btn-success btn-sm">
                                 <i class="fas fa-trash-restore mx-1"></i>Restaurar
                             </a>
-                            <a th:href="@{/delete/}+${tarea.idTarea}" class="btn btn-danger btn-sm">Eliminar Tarea</a>
+                            <a th:href="@{'/delete/' + ${idUsuario} + '/' + ${tarea.idTarea}}" class="btn btn-danger btn-sm">Eliminar Tarea</a>
                         </td>
                     </tr>
                 </tbody>
@@ -63,12 +62,12 @@
             <iframe src="https://giphy.com/embed/CM1rHbKDMH2BW" width="240" height="180" frameBorder="0" class="giphy-embed rounded" allowFullScreen style="pointer-events: none;"></iframe>
             <div class="h1">Vaya! Parece que no hay ninguna tarea</div>
             <p>Para comenzar, has click en el botón de agregar tarea o en el símbolo de abajo a la derecha!</p>
-            <a th:href="@{/crear}" class="btn btn-success">Agregar Tarea</a> 
+            <a th:href="@{/crear/}+${idUsuario}" class="btn btn-success">Agregar Tarea</a> 
         </section>
         
         
-        <section th:if="${!tareasActivas.empty or !tareasInactivas.empty}" class="add-button">
-            <a class="btn btn-success rounded-circle" th:href="@{/crear}">
+        <section th:if="${!tareasActivas.isEmpty or !tareasInactivas.empty}" class="add-button">
+            <a class="btn btn-success rounded-circle" th:href="@{/crear/}+${idUsuario}">
                 <i class="fa-solid fa-plus fs-4 p-3"></i>
             </a>
         </section>
