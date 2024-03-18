@@ -16,19 +16,19 @@
         <nav class="navbar bg-dark navbar-dark navbar-extend p-2">
             <div class="container-fluid">
                 <a class="navbar-brand fs-4 fw-bold" th:href="@{/}">
-                    <i class="fa-solid fa-dumbbell mx-2"></i> Work Hard, Gain Hard
+                    <i class="fas fa-tasks mx-2"></i> Planning made all easy
                 </a>
             </div>
         </nav>
 
         <section class="container-fluid d-flex flex-grow-1 px-0">
             <div class="col">
-                <img src="https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg" class="img-fluid" style="object-fit: cover; height: 100%">
+                <img src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="img-fluid" style="object-fit: cover; height: 100%">
             </div>
             <div class="col d-flex align-items-center">
                 <div class="container-fluid d-flex flex-column">
                     <form class="pb-5 border-bottom px-5" th:action="@{/usuario/crear}" th:object="${usuario}" method="POST">
-                        <div class="text-center fw-bold" style="font-size: 10vh">Legends Workout</div>
+                        <div class="text-center fw-bold" style="font-size: 10vh">Task Manager</div>
                         <h2 class="mb-5 text-center">Registro de Usuario</h2>
                         <div class="row mb-3">
                             <div class="col-4">
